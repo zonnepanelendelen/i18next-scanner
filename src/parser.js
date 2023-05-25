@@ -822,9 +822,10 @@ class Parser {
       // })
 
       if (_.isString(this.options.nsSeparator) && (key.indexOf(this.options.nsSeparator) > -1)) {
-        const parts = key.split(this.options.nsSeparator);
+        const namespaceMatch = key.match(/([a-z-]+)./);
+        ns = namespaceMatch[1];
 
-        ns = parts[0];
+        const parts = key.split(this.options.nsSeparator);
         key = parts[1];
       }
 
@@ -876,7 +877,9 @@ class Parser {
       ? options.keySeparator
       : this.options.keySeparator;
 
-    let ns = options.ns || this.options.defaultNs;
+    const namespaceMatch = key.match(/([a-z-]+)./);
+
+    let ns = namespaceMatch[1] || options.ns || this.options.defaultNs;
 
     console.assert(_.isString(ns) && !!ns.length, 'ns is not a valid string', ns);
 
@@ -889,9 +892,10 @@ class Parser {
     // })
 
     if (_.isString(nsSeparator) && (key.indexOf(nsSeparator) > -1)) {
-      const parts = key.split(nsSeparator);
+      const namespaceMatch = key.match(/([a-z-]+)./);
+      ns = namespaceMatch[1];
 
-      ns = parts[0];
+      const parts = key.split(nsSeparator);
       key = parts[1];
     }
 
