@@ -22,6 +22,8 @@ i18next.init({
   compatibilityJSON: 'v3',
 });
 
+const namespaceRegexp = /([a-z-_]+).\w/;
+
 const defaults = {
   debug: false, // verbose logging
 
@@ -822,7 +824,7 @@ class Parser {
       // })
 
       if (_.isString(this.options.nsSeparator) && (key.indexOf(this.options.nsSeparator) > -1)) {
-        const namespaceMatch = key.match(/([a-z-]+)./);
+        const namespaceMatch = key.match(namespaceRegexp);
         ns = namespaceMatch[1];
 
         const parts = key.split(this.options.nsSeparator);
@@ -877,8 +879,7 @@ class Parser {
       ? options.keySeparator
       : this.options.keySeparator;
 
-    const namespaceMatch = key.match(/([a-z-]+)./);
-
+    const namespaceMatch = key.match(namespaceRegexp);
     let ns = namespaceMatch[1] || options.ns || this.options.defaultNs;
 
     console.assert(_.isString(ns) && !!ns.length, 'ns is not a valid string', ns);
@@ -892,7 +893,7 @@ class Parser {
     // })
 
     if (_.isString(nsSeparator) && (key.indexOf(nsSeparator) > -1)) {
-      const namespaceMatch = key.match(/([a-z-]+)./);
+      const namespaceMatch = key.match(namespaceRegexp);
       ns = namespaceMatch[1];
 
       const parts = key.split(nsSeparator);
