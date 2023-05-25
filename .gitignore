@@ -2,6 +2,6 @@ node_modules
 package-lock.json
 yarn.lock
 /.nyc_output
-/lib
 /output
 /coverage
+.idea
